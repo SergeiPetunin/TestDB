@@ -5,10 +5,13 @@
  */
 package entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 
 /**
  *
@@ -23,6 +26,8 @@ public class Student {
     private int day;
     private int month;
     private int year;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private GroupName groupName;
 
     public Student() {
     }
@@ -77,13 +82,24 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{"
-                + "id=" + id
+        return "Student{" 
+                + "id=" + id 
                 + ", firstname=" + firstname 
                 + ", lastname=" + lastname 
                 + ", day=" + day 
                 + ", month=" + month 
-                + ", year=" + year + '}';
+                + ", year=" + year 
+                + ", groupName=" + groupName 
+                + '}';
+    }
+
+
+    public GroupName getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(GroupName groupName) {
+        this.groupName = groupName;
     }
     
 }
